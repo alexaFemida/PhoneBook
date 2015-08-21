@@ -1,0 +1,71 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+
+        <div class="row">
+            <div class="col-md-6"><h2>Contacts</h2></div>
+           
+        </div>
+    </div>
+    <div class="panel-body">
+        <div id="dataTables-example_wrapper" class="datatables_wrapper form-inline">
+            <table id="myDataTable" class="table table-striped table-bordered table-hover  dataTable" style="width:100%;">
+                <thead>
+                    <tr>
+                        <th>
+                            First Name
+                        </th>
+                        <th>
+                            Last Name
+                        </th>
+                        <th>
+                            Street
+                        </th>
+                        <th>
+                            Phone Number
+                        </th>
+                        <th>
+                            Location Name
+                        </th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+@section scripts{
+    <script type="text/javascript" lang="javascript">
+        $(document).ready(function () {
+            $('#myDataTable').dataTable({
+                "oTableTools": {
+                    "aButtons": [
+                        {
+                            "sExtends": "text"
+                        }
+                    ]
+                },
+                "bServerSide": true,
+                "sAjaxSource": "Home/AjaxHandler",
+                "bProcessing": true,
+                "searching": true,
+
+                "aoColumns": [
+                    { "sName": "FIRST_NAME" },
+                    { "sName": "LAST_NAME" },
+                    { "sName": "STREET" },
+                    { "sName": "PHONE_NUMBER" },
+                    { "sName": "LOCATION_Name" }
+                             ],
+            });
+        });
+    </script>
+}
+
+
+
+

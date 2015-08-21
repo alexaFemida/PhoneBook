@@ -1,0 +1,127 @@
+﻿@{
+    ViewBag.Title = "Contacts Page";
+}
+
+<div class="panel panel-default">
+    <div class="panel-heading">
+
+        <div class="row">
+            <div class="col-md-6"><h2>Contacts</h2></div>
+            <div class="col-md-6">
+                <button id="btnAddNewRow">Add</button>
+            </div>
+        </div>
+    </div>
+    <div class="panel-body">
+        <div id="dataTables-example_wrapper" class="datatables_wrapper form-inline">
+            <table id="myDataTable" class="table table-striped table-bordered table-hover  dataTable" style="width:100%;">
+                <thead>
+                    <tr>
+                        <th>
+                            First Name
+                        </th>
+                        <th>
+                            Last Name
+                        </th>
+                        <th>
+                            User Name
+                        </th>
+                        <th>
+                            Pasword
+                        </th>
+                        <th>
+                            Street
+                        </th>
+                        <th>
+                            Phone Number
+                        </th>
+                        <th>
+                            Location Name
+                        </th>
+                        <th>
+                            Role Name
+                        </th>
+                       <th></th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<form id="formAddNewRow" action="#" title="Add new product">
+    <label for="firstName">First Name</label><input type="text" name="firstName" id="firstName" class="required" rel="0" />
+    <br />
+    <label for="lastName">Last Name</label><input type="text" name="lastName" id="lastName" class="required" rel="1" />
+    <br />
+    <label for="userName">User Name</label><input type="text" name="userName" id="userName" class="required" rel="2" />
+    <br />
+    <label for="password">Password</label><input type="text" name="password" id="password" class="required" rel="3" />
+    <br />
+    <label for="street">Street</label><input type="text" name="street" id="street" class="required" rel="4" />
+    <br />
+   <label for="phoneNumber">Phone Number</label><input type="text" name="phoneNumber" id="phoneNumber" class="required" rel="5" />
+    <br />
+    <label for="locationId">Location Id</label><input type="text" name="locationId" id="locationId" class="required" rel="6" />
+    <br />
+    <label for="roleName">Role Name</label><input type="text" name="roleName" id="roleName" class="required" rel="7" />
+    <br />
+    <label for="userId" class="hidden">User Id</label><input type="text" name="userId" id="userId" class="hidden" rel="8" />
+    <br />
+</form>
+
+@section scripts{
+    <script type="text/javascript" lang="javascript">
+        $(document).ready(function () {
+            $('#myDataTable').dataTable({
+                "oTableTools": {
+                    "aButtons": [
+                        {
+                            "sExtends": "text"
+                        }
+                    ]
+                },
+                "bServerSide": true,
+                "sAjaxSource": "Admin/AjaxHandler",
+                "bProcessing": true,
+                "searching": true,
+               
+                "aoColumns": [
+                    { "sName": "FIRST_NAME" },
+                    { "sName": "LAST_NAME" },
+                    { "sName": "USER_NAME" },
+                    { "sName": "PASSWORD" },
+                    { "sName": "STREET" },
+                    { "sName": "PHONE_NUMBER" },
+                    { "sName": "LOCATION_Name" },
+                    { "sName": "ROLE_NAME" },
+                    {
+                        "sName": "Actions",
+                        "fnRender": function (oObj) {
+
+                            return "<a href='/Admin/Edit/" + oObj.aData[0] + "'>Edit</a>";
+
+                        }
+                    }
+                ],
+            });
+            var editor = $('#myDataTable').dataTable().makeEditable({
+                sAddURL: "/Admin/AddData",
+                oAddNewRowButtonOptions: {
+                    label: "Add Product",
+                    class: "btn btn-primary",
+                },
+                oDeleteRowButtonOptions: {
+                    label: "Remove",
+                    visibility: "hidden"
+                },
+                oAddNewRowOkButtonOptions: {
+                    label: "Confirm",
+                    name: "action",
+                    value: "add-new"
+                }
+            });
+        });
+    </script>
+}
