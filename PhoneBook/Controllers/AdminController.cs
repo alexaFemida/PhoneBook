@@ -34,7 +34,7 @@ namespace PhoneBook.Controllers
             param.iDisplayStart, param.iDisplayLength, param.sSearch);
 
          var result = from c in displayedCompanies
-                      select new[] { c.FirstName.ToString(), c.LastName.ToString(), c.UserName, c.Password, c.Street, c.PhoneNumber, c.ZipLocation.City.ToString(), c.RoleName, "<a style='font-family:arial' href='" + "/Admin/Edit/ " + c.UserId + "' />Edit</a>|<a style='font-family:arial' href='" + "///Delete/" + c.UserId + "' />Delete</a>" };
+                      select new[] { c.FirstName.ToString(), c.LastName.ToString(), c.UserName, c.Password, c.Street, c.PhoneNumber, c.ZipLocation.City.ToString(), c.RoleName, "<a style='font-family:arial' href='" + "/Admin/Edit/ " + c.UserId + "' />Edit</a>|<a style='font-family:arial' href='" + "/Admin/Delete/" + c.UserId + "' />Delete</a>" };
 
          return Json(new
          {
